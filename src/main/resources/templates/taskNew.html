@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>新規作成</title>
+<style>
+	body{
+		width: 500px; 
+		margin: 0 auto;
+	}  
+</style>
+</head>
+<body>
+	<h1>新規作成</h1>
+	
+	<ul th:if="${err}">
+				<li th:text="${err}"></li>
+		</ul>
+	
+	
+	<form action="/task/add" method="post">
+	<table border="1" width="70%">
+		
+		    <tr>
+		        <th>日付</th>
+		       <td th:text="${#temporals.format(date,'MM/dd')}"></td>
+		    </tr>   
+		    <tr>
+		        <th>運動内容</th>
+		        <td><input type="text" name="content" th:value="${content}"></input></td>
+		    </tr>
+		    <tr>
+		        <th>頑張り度(％)</th>
+		        <td><input type="number" style="width: 20% ;" name="ganbari" th:value="${ganbari}"></td>
+		    </tr>
+		    <tr>
+		        <th>詳細</th>
+		        <td><textarea rows="5" cols="30" name="memo" th:value="${memo}"></textarea></td>
+		    </tr>
+
+		</table><br>
+
+			<button>登録</button>
+		</form><br>
+		<a href="/task">戻る</a>
+
+</body>
+</html>

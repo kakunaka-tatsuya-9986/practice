@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>更新</title>
+
+<style>
+	body{
+	width: 500px; 
+	margin: 0 auto;
+}  
+</style>
+</head>
+<body>
+	<h1>更新</h1>
+	<form th:action="@{/task/{id}/updatecom(id=${task.id})}" method="post">
+	<table border="1">	
+	<tr>
+		<th>No</th>
+		<td  th:text="${task.id}"></td>
+	</tr>
+	<tr>
+		<th>運動内容</th>
+		<td><input type="text" name="&{task.name}" th:value="${task.content}"></td>
+	</tr>
+	<tr>
+		<th>頑張り度(%)</th>
+		<td><input type="number" style="width: 20%;" name="&{task.ganbari}" th:value="${task.ganbari}"></td>
+	</tr>
+	
+	<tr>
+		<th>メモ</th>
+		<td><textarea rows="5" cols="30" name="&{task.memo}" th:value="${task.memo}"></textarea></td>
+	</tr>
+	
+	</table><br>
+	<button>更新</button>
+	</form><br>
+	<a href="/task">戻る</a>
+</body>
+</html>

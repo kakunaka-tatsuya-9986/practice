@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>運動管理</title>
+<style>
+	body{
+	width: 500px; 
+	margin: 0 auto;
+}  
+</style>
+</head>
+<body>
+	<h1>運動管理</h1>
+<!--	<p th:if="${user.name}" th:text="${user.name + ' さん、ようこそ'}"></p>-->
+	<br>
+	<a href="/task/new">新規作成</a>
+	
+	
+	
+	<table border="1" width="100%">
+		<tr>
+			<th>No</th>
+			<th>日付</th>
+			<th>運動内容</th>
+			<th>頑張り度(％)</th>
+			<th>詳細</th>
+			<th>更新</th>
+			<th>削除</th>
+		</tr>
+		
+		<tr th:each="task : ${tasks}">
+			<td th:text="${task.id}"></td>
+			<td th:text="${#temporals.format(task.date,'MM/dd')}"></td>
+			<td th:text="${task.content}"></td>
+			<td th:text="|${task.ganbari}%|"></td>
+			<td style="width: 10%;">
+				<a th:href="@{/task/{id}/detail(id=${task.id})}">
+					<button>詳細</button>
+				</a>
+			</td>
+			<td style="width: 10%;">
+				<form th:action="@{/task/{id}/update(id=${task.id})}" method="get">
+					<button>更新</button>
+				</form>
+			</td>
+			
+			<td style="width: 10%;" >
+				<form th:action="@{/task/{id}/delete(id=${task.id})}" method="post">
+					<button>削除</button>
+				</form>
+			</td>			
+		</tr>
+	</table>
+	
+</body>
+</html>
