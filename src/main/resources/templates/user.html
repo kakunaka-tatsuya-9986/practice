@@ -3,26 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>運動管理</title>
-<style>
-	body{
-	width: 500px; 
-	margin: 0 auto;
-}
-   
-</style>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 <body>
 	<h1>運動管理</h1><br>
-	<form action="/users/new" method="post">
-		<button>新規登録</button>
-	</form>	
-	<form action="/users/login" method="post">	
-	<button>ログイン</button>
-    </form>
-		</form>
-	
-	
+	<table border="1" class="table1">
+		<td>
+			<form action="/users/new" method="post">
+			<button class="button3">新規登録</button></form>
+		</td>
+		<td>
+		    <form action="/users/login" method="post">	
+			<button class="button3">ログイン</button></form>
+		</td>
 
 </body>
 </html>

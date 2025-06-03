@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,18 +13,25 @@ import jakarta.persistence.Table;
 @Table(name = "tasks")
 
 public class Task {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private LocalDateTime date;
+
+	@Column(length = 255)
 	private String content;
-	private Integer ganbari;
+
+	@Column(columnDefinition = "VARCHAR(30) DEFAULT '0'")
+	private String ganbari;
+
+	@Column(length = 300)
 	private String memo;
 
 	public Task() {
 	}
 
-	public Task(String content, Integer ganbari, String memo) {
+	public Task(String content, String ganbari, String memo) {
 		this.content = content;
 		this.ganbari = ganbari;
 		this.memo = memo;
@@ -42,7 +50,7 @@ public class Task {
 		return memo;
 	}
 
-	public Integer getGanbari() {
+	public String getGanbari() {
 		return ganbari;
 	}
 
@@ -50,7 +58,7 @@ public class Task {
 		this.content = content;
 	}
 
-	public void setGanbari(Integer ganbari) {
+	public void setGanbari(String ganbari) {
 		this.ganbari = ganbari;
 	}
 

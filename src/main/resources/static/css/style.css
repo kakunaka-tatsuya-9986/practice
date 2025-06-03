@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+ body{
+	width: 500px; 
+	margin: 0 auto;
+	background-color:lightgray;
+}
+
+ .ex{
+   height: 100px;
+}
+
+ li{
+	color:red;
+	
+}
+
+ h1{
+	color: white;
+	background-color: gray;
+}
+
+ th{
+	background-color: gray;
+	color: white;
+ }
+ tr{
+	background-color: white;
+ }
+ .button1{
+	background-color: #2f4f4f;
+	color: #fff;
+	padding: 5px 15px;
+	text-decoration: none;
+	font-size: 1em;
+ }
+ .button2{
+	    display: inline-block;
+	    background-color: #fff;
+	    border: solid 2px dimgray;
+	    color: dimgray;
+	    width: 40px;
+	    height: 30px;
+	    border-radius:5px;
+	    line-height: 15px;
+	    text-align: center;
+	    font-size: 0.8em;
+	    text-decoration: none;
+	    transform: rotate(0deg);
+	    padding: 0; 
+	}	
+ .button3{
+	 background-color: darkgray;
+     color: #fff;
+     border-radius: 10px;
+     padding: 10px 30px;
+     text-decoration: none;
+     font-size: 1em;
+  }
+	
+	
+.button4{
+	 background-color: #fff;
+	 border: double 6px  darkslategray;
+	 color: darkslategray;
+	 border-radius: 10px;
+	 padding: 10px 30px;
+	 text-decoration: none;
+	 font-size: 1em;
+}
+
+.button5{
+	background-color: lightslategrey;
+	  color: #000;
+	  border-radius: 10px;
+	  padding: 5px 15px;
+	  text-decoration: none;
+	  font-size: 1em;
+  }
+	  
+.table1{
+	 margin: 30px 100px;
+	
+}
+
+ 
+

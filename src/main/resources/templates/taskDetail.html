@@ -4,16 +4,7 @@
 <meta charset="UTF-8">
 <title>詳細</title>
 
-<style>
-	body{
-	width: 500px; 
-	margin: 0 auto;
-}  
-
-   .ex{
-    height: 100px;
-	}
-</style>
+<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 	<h1>詳細</h1>
@@ -34,12 +25,16 @@
 		<td th:text="|${task.ganbari}%|"></td>
 	</tr>
 	
+	
 	<tr class="ex">
 		<th>メモ</th>
 		<td th:text="${task.memo}"></td>
 	</tr>
 	
 	</table><br>
+	<ul>
+	   <li th:each="low : ${lowList}" th:text="${low}"></li> <!-- リストとして表示 -->
+	</ul>
 	<a href="/task">戻る</a>
 </body>
 </html>

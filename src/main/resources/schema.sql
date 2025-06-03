@@ -15,6 +15,6 @@ CREATE TABLE tasks (
 id SERIAL PRIMARY KEY,
 date DATE,
 content VARCHAR(255),
-ganbari INTEGER,
+ganbari VARCHAR(30),
 memo VARCHAR(300)
 );

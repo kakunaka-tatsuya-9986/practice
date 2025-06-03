@@ -3,20 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>運動管理</title>
-<style>
-	body{
-	width: 500px; 
-	margin: 0 auto;
-}  
-</style>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
 </head>
 <body>
 	<h1>運動管理</h1>
-<!--	<p th:if="${user.name}" th:text="${user.name + ' さん、ようこそ'}"></p>-->
+	<span th:text="${user.name + 'さん、ようこそ　'}"></span><a href="/users">ログアウト</a><br>
 	<br>
-	<a href="/task/new">新規作成</a>
-	
-	
+	<form action="/task/new" method="post">
+		<button class="button5">新規作成</button><br>
+		
+	</form><br>
 	
 	<table border="1" width="100%">
 		<tr>
@@ -36,18 +34,18 @@
 			<td th:text="|${task.ganbari}%|"></td>
 			<td style="width: 10%;">
 				<a th:href="@{/task/{id}/detail(id=${task.id})}">
-					<button>詳細</button>
+					<button class="button2">詳細</button>
 				</a>
 			</td>
 			<td style="width: 10%;">
 				<form th:action="@{/task/{id}/update(id=${task.id})}" method="get">
-					<button>更新</button>
+					<button class="button2">更新</button>
 				</form>
 			</td>
 			
 			<td style="width: 10%;" >
-				<form th:action="@{/task/{id}/delete(id=${task.id})}" method="post">
-					<button>削除</button>
+				<form th:action="@{/task/{id}/condelete(id=${task.id})}" method="get">
+					<button class="button2">削除</button>
 				</form>
 			</td>			
 		</tr>

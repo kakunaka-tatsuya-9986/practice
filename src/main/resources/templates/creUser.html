@@ -3,37 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>新規会員登録</title>
-<style>
-	body{
-	width: 500px; 
-	margin: 0 auto;
-}
-   
-</style>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 	<h1>新規会員登録</h1>
-	<ul th:if="${err}">
+	<ul th:each="err:${errList}">
     <li th:text="${err}"></li>
     </ul>
-	<form action="/task/cre" method="post">
+	<form action="/users/con" method="post">
 	<table border="1">
 		<tr>
-			<th>名前</th>
-			<td><input type="text" name="name"></td>
+			<th>ID(数字のみ)</th>
+		    <td><input type="number" name="id" th:value="${id}"></td>			
 		</tr>
 		<tr>
-			<th>ID(数字のみ)</th>
-			<td><input type="number" name="id"></td>
+			<th>名前</th>
+			<td><input type="text" name="name" th:value="${name}"></td>
+			
 		</tr>
 		<tr>
 			<th>パスワード</th>
-			<td><input type="text" name="password"></td>
+			<td><input type="password" name="password"></td>
 		</tr>
 		
 	</table>
 	<br>
-	<button>登録</button>
+	<button class="button1">登録</button>
 	</form>
 	
 

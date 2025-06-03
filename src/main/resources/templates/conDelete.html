@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>削除確認</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+	<h1>削除確認</h1>
+	<p>選択されたタスクを削除します</p><br>
+	
+	<form th:action="@{/task/{id}/delete(id=${task.id})}" method="post">
+		<button class="button4">削除</button><br>
+		
+	</form><br>
+	<a href="/task">戻る</a>
+	
+	
+
+</body>
+</html>
