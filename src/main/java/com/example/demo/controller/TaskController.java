@@ -41,6 +41,28 @@ public class TaskController {
 		return "task";
 	}
 
+	@PostMapping("/task/lowganbari")
+	public String lowganbari(@RequestParam(name = "lowganbari", required = false) String lowganbari,
+			Model model,
+			HttpSession session) {
+		User sessionUser = (User) session.getAttribute("user");
+		model.addAttribute("user", sessionUser);
+
+		List<Task> tasks;
+
+		if ("true".equals(lowganbari)) {
+			tasks = taskRepository.findByGanbariLessThanEqual40();
+			model.addAttribute("lowganbariChecked", true);
+		} else {
+			tasks = taskRepository.findAll(Sort.by(Sort.Order.asc("id")));
+			model.addAttribute("lowganbariChecked", false);
+		}
+
+		model.addAttribute("tasks", tasks);
+		return "task";
+
+	}
+
 	@PostMapping("/task/new")
 	public String tasknew(
 			Model model) {
@@ -101,11 +123,20 @@ public class TaskController {
 	@GetMapping("/task/{id}/detail")
 	public String taskdetail(
 			@PathVariable("id") Integer id,
-
+			@RequestParam(name = "ganbari", required = false) String ganbari,
 			Model model) {
 
 		Task task = taskRepository.findById(id).get();
 		model.addAttribute("task", task);
+
+		List<String> lowList = new ArrayList<>();
+		int ganbariValue = Integer.parseInt(ganbari.trim());
+		if (ganbariValue < 40) {
+			lowList.add("もう少し頑張りましょう");
+		}
+		if (!lowList.isEmpty()) {
+			model.addAttribute("lowList", lowList);
+		}
 
 		return "taskDetail";
 	}

@@ -10,12 +10,15 @@
 	<h1>新規会員登録</h1>
 	<ul th:each="err:${errList}">
     <li th:text="${err}"></li>
-    </ul>
+    </ul><br>
+	
+	<a href="/users/login">ログインフォームはこちら</a>
+	
 	<form action="/users/con" method="post">
 	<table border="1">
 		<tr>
 			<th>ID(数字のみ)</th>
-		    <td><input type="number" name="id" th:value="${id}"></td>			
+		    <td><input type="number" name="usid" th:value="${usid}"></td>			
 		</tr>
 		<tr>
 			<th>名前</th>

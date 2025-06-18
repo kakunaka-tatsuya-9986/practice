@@ -9,12 +9,23 @@
 </head>
 <body>
 	<h1>運動管理</h1>
-	<span th:text="${user.name + 'さん、ようこそ　'}"></span><a href="/users">ログアウト</a><br>
-	<br>
+	<div  style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+	<div style="display: flex; align-items: center; gap: 15px;">
+	<span th:text="${user.name + 'さん、ようこそ　'}"></span>
+	<a href="/users">ログアウト</a>
+	</div>
+	 
 	<form action="/task/new" method="post">
-		<button class="button5">新規作成</button><br>
-		
+	    <button class="button5" style="padding: 10px 20px;">新規作成</button>
+	</form>
+	</div>
+	
+	
+	<form action ="/task/lowganbari" method="post" class="form1">
+	<label><input type="checkbox" name="lowganbari" value="true" th:checked="${lowganbariChecked}">頑張り度40％以下</label>
+	<button class="button7">絞り込み</button><br>
 	</form><br>
+
 	
 	<table border="1" width="100%">
 		<tr>
@@ -28,12 +39,12 @@
 		</tr>
 		
 		<tr th:each="task : ${tasks}">
-			<td th:text="${task.id}"></td>
+			<td th:text="${task.id}" style="text-align: right;"></td>
 			<td th:text="${#temporals.format(task.date,'MM/dd')}"></td>
 			<td th:text="${task.content}"></td>
-			<td th:text="|${task.ganbari}%|"></td>
+			<td th:text="|${task.ganbari}%|" style="text-align: right;"></td>
 			<td style="width: 10%;">
-				<a th:href="@{/task/{id}/detail(id=${task.id})}">
+				<a th:href="@{/task/{id}/detail(id=${task.id},ganbari=${task.ganbari})}">
 					<button class="button2">詳細</button>
 				</a>
 			</td>

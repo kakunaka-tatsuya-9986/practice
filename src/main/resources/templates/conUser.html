@@ -10,11 +10,11 @@
 	<h1>新規会員登録 確認</h1>
 	
 	<p>この内容で登録します</p>
-	<form action="/task/cre" method="post">
+	<form action="/users/complete" method="post">
 	<table border="1">
 	<tr>
 		<th>ID</th>
-		<td th:text="${user.id}"></td>
+		<td th:text="${user.usid}"></td>
 	</tr>
 	<tr>
 		<th>名前</th>
@@ -27,7 +27,7 @@
 	</table><br>
 	<button class="button1">登録</button>
 
-	<input type="hidden" name="id" th:value="${user.id}" />
+	<input type="hidden" name="usid" th:value="${user.usid}" />
     <input type="hidden" name="name" th:value="${user.name}" />
     <input type="hidden" name="password" th:value="${user.password}" />
 	

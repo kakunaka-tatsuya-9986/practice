@@ -22,10 +22,9 @@ public class Task {
 	@Column(length = 255)
 	private String content;
 
-	@Column(columnDefinition = "VARCHAR(30) DEFAULT '0'")
 	private String ganbari;
 
-	@Column(length = 300)
+	@Column(length = 255)
 	private String memo;
 
 	public Task() {

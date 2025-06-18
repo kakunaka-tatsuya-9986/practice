@@ -5,16 +5,18 @@
 <title>詳細</title>
 
 <link rel="stylesheet" th:href="@{/css/style.css}">
+
 </head>
 <body>
 	<h1>詳細</h1>
-	
-	
+	<ul th:each="low : ${lowList}">
+		   <li th:text="${low}"></li>
+		</ul><br>
 	
 	<table border="1">
 	<tr>
 		<th>No</th>
-		<td th:text="${task.id}"></td>
+		<td th:text="${task.id}" style="text-align: right;"></td>
 	</tr>
 	<tr>
 		<th>運動内容</th>
@@ -22,7 +24,7 @@
 	</tr>
 	<tr>
 		<th>頑張り度(%)</th>
-		<td th:text="|${task.ganbari}%|"></td>
+		<td th:text="|${task.ganbari}%|" style="text-align: right;"></td>
 	</tr>
 	
 	
@@ -32,9 +34,7 @@
 	</tr>
 	
 	</table><br>
-	<ul>
-	   <li th:each="low : ${lowList}" th:text="${low}"></li> <!-- リストとして表示 -->
-	</ul>
+	
 	<a href="/task">戻る</a>
 </body>
 </html>

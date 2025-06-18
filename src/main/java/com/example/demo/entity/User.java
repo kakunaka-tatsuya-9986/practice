@@ -33,10 +33,14 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String name, String password, Integer id) {
+	public User(String name, String password, Integer usid) {
 		this.name = name;
 		this.password = password;
-		this.id = id;
+		this.usid = usid;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -55,12 +59,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Integer getusId() {
+	public Integer getUsid() {
 		return usid;
 	}
 
-	public void setusId(Integer usid) {
+	public void setUsid(Integer usid) {
 		this.usid = usid;
 	}
-
 }

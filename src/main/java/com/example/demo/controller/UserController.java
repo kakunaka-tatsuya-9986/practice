@@ -27,9 +27,6 @@ public class UserController {
 	UserRepository userRepository;
 
 	@Autowired
-	User user;
-
-	@Autowired
 	HttpSession httpSession;
 
 	@GetMapping("/users")
@@ -46,6 +43,12 @@ public class UserController {
 	public String showcreuser() {
 
 		return "creUser";
+	}
+
+	@GetMapping("/users/login")
+	public String showloguser() {
+
+		return "logUser";
 	}
 
 	@PostMapping("/users/new")
@@ -65,61 +68,56 @@ public class UserController {
 			Model model,
 			HttpSession session) {
 
-		User user = userRepository.findByLogin(name, password);
+		List<String> errList = new ArrayList<>();
 
-		// DBのユーザー情報と入力されたパスワードを比較
-		if (user != null && user.getPassword().equals(password)) {
-
-			session.setAttribute("user", user);
-			return "/task"; // ログイン後のページにリダイレクト
+		if (name.trim().isEmpty()) {
+			errList.add("名前は必須です");
 		}
 
-		return "redirect:/users";
+		if (password.trim().isEmpty()) {
+			errList.add("パスワードは必須です");
+		}
 
-		//		List<String> errList = new ArrayList<>();
+		if (!errList.isEmpty()) {
+			model.addAttribute("errList", errList);
+			model.addAttribute("name", name);
+			return "logUser";
+		}
 
-		//		if (name.trim().isEmpty()) {
-		//			errList.add("名前フォームは必須です");
-		//			model.addAttribute("name", name);
-		//
-		//		} else if (name.length() < 3) {
-		//			errList.add("名前は3文字以上で入力してください");
-		//			model.addAttribute("name", name);
-		//		} else if (name.length() > 10) {
-		//			errList.add("名前は10文字以下で入力してください");
-		//			model.addAttribute("name", name);
-		//
-		//		}
-		//		if (password.trim().isEmpty()) {
-		//			errList.add("パスワードフォームは必須です");
-		//			model.addAttribute("name", name);
-		//
-		//		} else if (password.length() < 5) {
-		//			errList.add("パスワードは5文字以上で入力してください");
-		//			model.addAttribute("name", name);
-		//		} else if (password.length() > 20) {
-		//			errList.add("パスワードは20文字以下で入力してください");
-		//			model.addAttribute("password", password);
-		//
-		//		}
-		//
-		//		if (!errList.isEmpty()) {
-		//			model.addAttribute("errList", errList);
-		//			return "logUser";
-		//		}
-		//
-		//		user.setName(name);
-		//		user.setPassword(password);
-		//		session.setAttribute("user", user);
-		//
-		//		List<Task> tasks = taskRepository.findAll();
-		//		model.addAttribute("tasks", tasks);
-		//		model.addAttribute("user", user);
-		//
-		//		userRepository.save(user);
-		//
-		//		return "task";
+		List<User> users = userRepository.findByNameAndPassword(name, password);
 
+		if (!users.isEmpty()) {
+
+			User user = users.get(0);
+			session.setAttribute("user", user);
+			model.addAttribute("user", user);
+
+			return "task";
+		} else {
+			errList.add("名前またはパスワードが間違っています");
+			model.addAttribute("errList", errList);
+			model.addAttribute("name", name);
+
+			return "logUser";
+
+		}
+
+	}
+
+	@PostMapping("/users/complete")
+	public String completeuser(
+			@RequestParam(name = "name", defaultValue = "") String name,
+			@RequestParam(name = "usid", required = false) Integer usid,
+			@RequestParam(name = "password", defaultValue = "") String password,
+			Model model,
+			HttpSession session) {
+
+		User user = new User(name, password, usid);
+		userRepository.save(user);
+		session.setAttribute("user", user);
+		model.addAttribute("user", user);
+
+		return "compUser";
 	}
 
 	@PostMapping("/task/cre")
@@ -130,16 +128,13 @@ public class UserController {
 			Model model,
 			HttpSession session) {
 
-		user.setusId(usid);
-		session.setAttribute("user", user);
-		User user = new User(name, password);
+		User user = new User(name, password, usid);
 		userRepository.save(user);
-
-		user.setusId(usid);
+		session.setAttribute("user", user);
+		model.addAttribute("user", user);
 
 		List<Task> tasks = taskRepository.findAll();
 		model.addAttribute("tasks", tasks);
-		model.addAttribute("user", user);
 
 		return "task";
 	}
@@ -156,61 +151,45 @@ public class UserController {
 
 		if (name.trim().isEmpty()) {
 			errList.add("名前フォームは必須です");
-			model.addAttribute("name", name);
-			model.addAttribute("usid", usid);
 
 		} else if (name.length() < 3) {
 			errList.add("名前は3文字以上で設定してください");
-			model.addAttribute("name", name);
-			model.addAttribute("usid", usid);
 
 		} else if (name.length() > 10) {
 			errList.add("名前は10文字以下で設定してください");
-			model.addAttribute("name", name);
 
 		}
 		if (password.trim().isEmpty()) {
 			errList.add("パスワードフォームは必須です");
-			model.addAttribute("name", name);
-			model.addAttribute("usid", usid);
 
 		} else if (password.length() < 5) {
 			errList.add("パスワードは5文字以上で設定してください");
-			model.addAttribute("name", name);
-			model.addAttribute("usid", usid);
 
 		} else if (password.length() > 20) {
 			errList.add("パスワードは20文字以下で設定してください");
-			model.addAttribute("password", password);
 
 		}
 		if (usid == null) {
 			errList.add("IDフォームは必須です");
-			model.addAttribute("name", name);
-			model.addAttribute("usid", usid);
 
 		} else if (String.valueOf(usid).length() > 9) {
 			errList.add("IDは10文字以下の数字で設定してください");
-			model.addAttribute("name", name);
-			model.addAttribute("usid", usid);
 
 		} else if (String.valueOf(usid).length() < 5) {
 			errList.add("IDは5文字以上の数字で設定してください");
-			model.addAttribute("name", name);
-			model.addAttribute("usid", usid);
+
 		}
 
 		if (!errList.isEmpty()) {
 			model.addAttribute("errList", errList);
+			model.addAttribute("name", name);
+			model.addAttribute("usid", usid);
 			return "creUser";
 		}
-		User user = new User(name, password);
-		userRepository.save(user);
-
-		user.setusId(usid);
-		session.setAttribute("user", user);
-
+		User user = new User(name, password, usid);
 		model.addAttribute("user", user);
+
+		session.setAttribute("user", user);
 
 		return "conUser";
 	}

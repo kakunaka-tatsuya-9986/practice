@@ -7,7 +7,8 @@ DROP TABLE IF EXISTS tasks;
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
 name VARCHAR(20),
-password VARCHAR(20)
+password VARCHAR(20),
+usid INTEGER
 );
 
 -- tasks（一覧）
@@ -16,5 +17,5 @@ id SERIAL PRIMARY KEY,
 date DATE,
 content VARCHAR(255),
 ganbari VARCHAR(30),
-memo VARCHAR(300)
+memo VARCHAR(255)
 );

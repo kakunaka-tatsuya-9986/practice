@@ -10,8 +10,12 @@
 	<h1>ログイン</h1>
 	<ul th:each="err:${errList}">
 	       <li th:text="${err}"></li>
-	   </ul>
+	   </ul><br>
+	   
+    <a href ="/users/new">新規会員登録フォームはこちら</a>
+	
 	<form action ="/task/top" method="post">
+		
 	<table border="1">
 			<tr>
 				<th>名前</th> 
